@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Создать отчёт</title>
+</head>
+<body>
+
+<h1>Создать отчёт об ошибке</h1>
+
+<form method="POST">
+
+    <p>Название проблемы:</p>
+    <input type="text" name="title" required>
+
+    <p>Модель робота:</p>
+    <input type="text" name="robot_model">
+
+    <p>Симптомы:</p>
+    <textarea name="symptoms"></textarea>
+
+    <p>Причина:</p>
+    <textarea name="cause"></textarea>
+
+    <p>Решение:</p>
+    <textarea name="solution"></textarea>
+
+    <p>Статус:</p>
+    <input type="text" name="status" value="open">
+
+    <br><br>
+
+    <button type="submit">Сохранить</button>
+
+</form>
+
+<br>
+<a href="/">← Назад</a>
+
+</body>
+</html>

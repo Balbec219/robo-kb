@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ROBO Knowledge Base</title>
+</head>
+<body>
+
+<h1>ROBO Knowledge Base</h1>
+
+<a href="/create">➕ Создать отчёт</a>
+
+<hr>
+
+<!-- ПОИСК -->
+<form method="GET">
+    <input type="text" name="search" placeholder="Поиск ошибки..." value="{{ search or '' }}">
+    <button type="submit">🔍 Найти</button>
+</form>
+
+<hr>
+
+<h2>Отчёты</h2>
+
+{% if reports %}
+    <ul>
+    {% for report in reports %}
+        <li>
+            <b>{{ report.title }}</b><br>
+            Модель: {{ report.robot_model }}<br>
+            Симптомы: {{ report.symptoms }}<br>
+            Статус: {{ report.status }}<br>
+        </li>
+        <hr>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Ничего не найдено</p>
+{% endif %}
+
+</body>
+</html>
