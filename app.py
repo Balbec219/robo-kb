@@ -7,9 +7,9 @@ app = Flask(__name__)
 SITE_VERSION = "1.1"
 
 def get_db_connection():
-conn = sqlite3.connect("database.db")
-conn.row_factory = sqlite3.Row
-return conn
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    return conn
 
 @app.route("/")
 def home():
