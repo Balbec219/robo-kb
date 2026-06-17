@@ -1,41 +1,83 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
-    <meta charset="UTF-8">
-    <title>Создать отчёт</title>
-</head>
-<body>
+<meta charset="UTF-8">
+<title>Создать отчёт</title><style>
 
-<h1>Создать отчёт об ошибке</h1>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
 
-<form method="POST">
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
 
-    <p>Название проблемы:</p>
-    <input type="text" name="title" required>
+input,
+textarea,
+select{
 
-    <p>Модель робота:</p>
-    <input type="text" name="robot_model">
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+    box-sizing:border-box;
+}
 
-    <p>Симптомы:</p>
-    <textarea name="symptoms"></textarea>
+button{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
 
-    <p>Причина:</p>
-    <textarea name="cause"></textarea>
+button:hover{
+    opacity:.9;
+}
 
-    <p>Решение:</p>
-    <textarea name="solution"></textarea>
+</style></head>
+<body><a href="/">← Назад</a>
 
-    <p>Статус:</p>
-    <input type="text" name="status" value="open">
-
-    <br><br>
-
-    <button type="submit">Сохранить</button>
-
-</form>
-
-<br>
-<a href="/">← Назад</a>
-
-</body>
+<div class="card"><h1>➕ Новый отчёт</h1><form method="POST"><p>Название проблемы</p>
+<input
+type="text"
+name="title"
+required
+><p>Модель робота</p>
+<input
+type="text"
+name="robot_model"
+><p>Симптомы</p>
+<textarea
+name="symptoms"
+rows="4"
+></textarea><p>Причина</p>
+<textarea
+name="cause"
+rows="4"
+></textarea><p>Решение</p>
+<textarea
+name="solution"
+rows="4"
+></textarea><p>Теги</p>
+<input
+type="text"
+name="tags"
+placeholder="датчик, лидар, карта, зарядка"
+><p>Статус</p><select name="status"><option value="open">
+🔴 Не решено
+</option><option value="progress">
+🟡 В процессе
+</option><option value="closed">
+🟢 Решено
+</option></select><button type="submit">
+💾 Сохранить отчёт
+</button></form></div></body>
 </html>

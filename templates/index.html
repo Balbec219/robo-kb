@@ -1,42 +1,142 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
-    <meta charset="UTF-8">
-    <title>ROBO Knowledge Base</title>
-</head>
-<body>
+<meta charset="UTF-8">
+<title>ROBO Knowledge Base</title><style>
 
-<h1>ROBO Knowledge Base</h1>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
 
-<a href="/create">➕ Создать отчёт</a>
+.header{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
 
-<hr>
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+    transition:0.2s;
+}
 
-<!-- ПОИСК -->
-<form method="GET">
-    <input type="text" name="search" placeholder="Поиск ошибки..." value="{{ search or '' }}">
-    <button type="submit">🔍 Найти</button>
-</form>
+.card:hover{
+    transform:translateY(-2px);
+}
 
-<hr>
+.card-link{
+    text-decoration:none;
+    color:inherit;
+}
 
-<h2>Отчёты</h2>
+.btn{
+    background:#007bff;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+}
 
-{% if reports %}
-    <ul>
-    {% for report in reports %}
-        <li>
-            <b>{{ report.title }}</b><br>
-            Модель: {{ report.robot_model }}<br>
-            Симптомы: {{ report.symptoms }}<br>
-            Статус: {{ report.status }}<br>
-        </li>
-        <hr>
-    {% endfor %}
-    </ul>
+.search{
+    margin:20px 0;
+}
+
+.search input{
+    width:300px;
+    padding:8px;
+}
+
+.status-open{
+    color:red;
+    font-weight:bold;
+}
+
+.status-progress{
+    color:orange;
+    font-weight:bold;
+}
+
+.status-closed{
+    color:green;
+    font-weight:bold;
+}
+
+.tag{
+    display:inline-block;
+    background:#e9ecef;
+    padding:4px 8px;
+    border-radius:8px;
+    margin-right:5px;
+    margin-top:5px;
+}
+
+</style></head><body><div class="header"><h1>🤖 ROBO Knowledge Base</h1><p>
+База знаний по роботам уборщикам
+</p><p>
+Версия {{ version }}
+</p><a class="btn" href="/create">
+➕ Создать отчёт
+</a></div><form class="search" method="GET"><input
+type="text"
+name="search"
+placeholder="Поиск по ошибкам, роботам и тегам..."
+value="{{ search or '' }}"
+
+«»
+
+<button type="submit">
+🔍 Найти
+</button></form>{% if reports %}
+
+{% for report in reports %}
+
+<a class="card-link" href="/report/{{ report.id }}"><div class="card"><h3>{{ report.title }}</h3><p>
+<b>Модель:</b>
+{{ report.robot_model }}
+</p><p>
+{{ report.symptoms }}
+</p><p>{% if report.status == "open" %}
+<span class="status-open">
+🔴 Не решено
+</span>
+
+{% elif report.status == "progress" %}
+<span class="status-progress">
+🟡 В процессе
+</span>
+
 {% else %}
-    <p>Ничего не найдено</p>
+<span class="status-closed">
+🟢 Решено
+</span>
+
 {% endif %}
+
+</p>{% if report.tags %}
+
+<p><b>Теги:</b>
+
+{% for tag in report.tags.split(",") %}
+
+<span class="tag">
+{{ tag.strip() }}
+</span>{% endfor %}
+
+</p>{% endif %}
+
+</div></a>{% endfor %}
+
+{% else %}
+
+<h3>Ничего не найдено</h3>{% endif %}
 
 </body>
 </html>

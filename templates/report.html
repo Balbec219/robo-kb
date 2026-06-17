@@ -1,0 +1,77 @@
+<!DOCTYPE html><html>
+<head>
+<meta charset="UTF-8">
+<title>{{ report.title }}</title><style>
+
+body{
+    font-family: Arial;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+.card{
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.status-open{
+    color:red;
+    font-weight:bold;
+}
+
+.status-progress{
+    color:orange;
+    font-weight:bold;
+}
+
+.status-closed{
+    color:green;
+    font-weight:bold;
+}
+
+</style></head>
+<body><a href="/">← Назад к списку отчётов</a>
+
+<hr><form
+method="POST"
+action="/delete/{{ report.id }}"
+onsubmit="return confirm('Удалить отчёт?')"
+><button
+type="submit"
+style="
+background:#dc3545;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:8px;
+cursor:pointer;
+"
+
+«»
+
+🗑 Удалить отчёт
+</button>
+
+</form>
+
+<div class="card"><h1>{{ report.title }}</h1><p><b>Модель робота:</b> {{ report.robot_model }}</p><p>
+<b>Статус:</b>{% if report.status == "open" %}
+<span class="status-open">🔴 Не решено</span>
+
+{% elif report.status == "progress" %}
+<span class="status-progress">🟡 В процессе</span>
+
+{% else %}
+<span class="status-closed">🟢 Решено</span>
+{% endif %}
+
+</p><hr><h3>Симптомы</h3>
+<p>{{ report.symptoms }}</p><h3>Причина</h3>
+<p>{{ report.cause }}</p><h3>Решение</h3>
+<p>{{ report.solution }}</p><h3>Теги</h3>
+<p>{{ report.tags }}</p></div></body>
+</html>
