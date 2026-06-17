@@ -1,8 +1,10 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<title>ROBO Knowledge Base</title><style>
+<title>ROBO Knowledge Base</title>
 
+<style>
 body{
     font-family: Arial, sans-serif;
     background:#f4f6f8;
@@ -54,20 +56,9 @@ body{
     padding:8px;
 }
 
-.status-open{
-    color:red;
-    font-weight:bold;
-}
-
-.status-progress{
-    color:orange;
-    font-weight:bold;
-}
-
-.status-closed{
-    color:green;
-    font-weight:bold;
-}
+.status-open{ color:red; font-weight:bold; }
+.status-progress{ color:orange; font-weight:bold; }
+.status-closed{ color:green; font-weight:bold; }
 
 .tag{
     display:inline-block;
@@ -77,66 +68,70 @@ body{
     margin-right:5px;
     margin-top:5px;
 }
+</style>
 
-</style></head><body><div class="header"><h1>🤖 ROBO Knowledge Base</h1><p>
-База знаний по роботам уборщикам
-</p><p>
-Версия {{ version }}
-</p><a class="btn" href="/create">
-➕ Создать отчёт
-</a></div><form class="search" method="GET"><input
-type="text"
-name="search"
-placeholder="Поиск по ошибкам, роботам и тегам..."
-value="{{ search or '' }}"
+</head>
 
-«»
+<body>
 
-<button type="submit">
-🔍 Найти
-</button></form>{% if reports %}
+<div class="header">
+    <h1>🤖 ROBO Knowledge Base</h1>
+    <p>База знаний по роботам уборщикам</p>
+    <p>Версия {{ version }}</p>
 
-{% for report in reports %}
+    <a class="btn" href="/create">➕ Создать отчёт</a>
+</div>
 
-<a class="card-link" href="/report/{{ report.id }}"><div class="card"><h3>{{ report.title }}</h3><p>
-<b>Модель:</b>
-{{ report.robot_model }}
-</p><p>
-{{ report.symptoms }}
-</p><p>{% if report.status == "open" %}
-<span class="status-open">
-🔴 Не решено
-</span>
+<form class="search" method="GET">
 
-{% elif report.status == "progress" %}
-<span class="status-progress">
-🟡 В процессе
-</span>
+<input type="text"
+       name="search"
+       placeholder="Поиск по ошибкам, роботам и тегам..."
+       value="{{ search or '' }}">
+
+<button type="submit">🔍 Найти</button>
+
+</form>
+
+{% if reports %}
+
+    {% for report in reports %}
+
+    <a class="card-link" href="/report/{{ report.id }}">
+        <div class="card">
+
+            <h3>{{ report.title }}</h3>
+
+            <p><b>Модель:</b> {{ report.robot_model }}</p>
+
+            <p>{{ report.symptoms }}</p>
+
+            <p>
+            {% if report.status == "open" %}
+                <span class="status-open">🔴 Не решено</span>
+            {% elif report.status == "progress" %}
+                <span class="status-progress">🟡 В процессе</span>
+            {% else %}
+                <span class="status-closed">🟢 Решено</span>
+            {% endif %}
+            </p>
+
+            {% if report.tags %}
+            <p><b>Теги:</b></p>
+
+            {% for tag in report.tags.split(",") %}
+                <span class="tag">{{ tag.strip() }}</span>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </a>
+
+    {% endfor %}
 
 {% else %}
-<span class="status-closed">
-🟢 Решено
-</span>
-
+    <h3>Ничего не найдено</h3>
 {% endif %}
-
-</p>{% if report.tags %}
-
-<p><b>Теги:</b>
-
-{% for tag in report.tags.split(",") %}
-
-<span class="tag">
-{{ tag.strip() }}
-</span>{% endfor %}
-
-</p>{% endif %}
-
-</div></a>{% endfor %}
-
-{% else %}
-
-<h3>Ничего не найдено</h3>{% endif %}
 
 </body>
 </html>

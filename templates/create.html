@@ -1,8 +1,10 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Создать отчёт</title><style>
+<title>Создать отчёт</title>
 
+<style>
 body{
     font-family:Arial,sans-serif;
     background:#f4f6f8;
@@ -21,7 +23,6 @@ body{
 input,
 textarea,
 select{
-
     width:100%;
     padding:10px;
     margin-top:5px;
@@ -41,43 +42,47 @@ button{
 button:hover{
     opacity:.9;
 }
+</style>
 
-</style></head>
-<body><a href="/">← Назад</a>
+</head>
+<body>
 
-<div class="card"><h1>➕ Новый отчёт</h1><form method="POST"><p>Название проблемы</p>
-<input
-type="text"
-name="title"
-required
-><p>Модель робота</p>
-<input
-type="text"
-name="robot_model"
-><p>Симптомы</p>
-<textarea
-name="symptoms"
-rows="4"
-></textarea><p>Причина</p>
-<textarea
-name="cause"
-rows="4"
-></textarea><p>Решение</p>
-<textarea
-name="solution"
-rows="4"
-></textarea><p>Теги</p>
-<input
-type="text"
-name="tags"
-placeholder="датчик, лидар, карта, зарядка"
-><p>Статус</p><select name="status"><option value="open">
-🔴 Не решено
-</option><option value="progress">
-🟡 В процессе
-</option><option value="closed">
-🟢 Решено
-</option></select><button type="submit">
-💾 Сохранить отчёт
-</button></form></div></body>
+<a href="/">← Назад</a>
+
+<div class="card">
+<h1>➕ Новый отчёт</h1>
+
+<form method="POST">
+
+<p>Название проблемы</p>
+<input type="text" name="title" required>
+
+<p>Модель робота</p>
+<input type="text" name="robot_model">
+
+<p>Симптомы</p>
+<textarea name="symptoms" rows="4"></textarea>
+
+<p>Причина</p>
+<textarea name="cause" rows="4"></textarea>
+
+<p>Решение</p>
+<textarea name="solution" rows="4"></textarea>
+
+<p>Теги</p>
+<input type="text" name="tags" placeholder="датчик, лидар, карта, зарядка">
+
+<p>Статус</p>
+<select name="status">
+    <option value="open">🔴 Не решено</option>
+    <option value="progress">🟡 В процессе</option>
+    <option value="closed">🟢 Решено</option>
+</select>
+
+<button type="submit">💾 Сохранить отчёт</button>
+
+</form>
+</div>
+
+</body>
 </html>
